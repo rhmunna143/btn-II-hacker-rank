@@ -1,30 +1,36 @@
-let btn1 = document.getElementById("btn1");
-let btn2 = document.getElementById("btn2");
-let btn3 = document.getElementById("btn3");
-let btn4 = document.getElementById("btn4");
-let btn5 = document.getElementById("btn5");
-let btn6 = document.getElementById("btn6");
-let btn7 = document.getElementById("btn7");
-let btn8 = document.getElementById("btn8");
-let btn9 = document.getElementById("btn9");
+var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-function clockwiseRotation() {
-    [btn1.innerHTML,
-    btn2.innerHTML,
-    btn3.innerHTML,
-    btn4.innerHTML,
-    btn6.innerHTML,
-    btn7.innerHTML,
-    btn8.innerHTML,
-    btn9.innerHTML] =
-        [btn4.innerHTML,
-        btn1.innerHTML,
-        btn2.innerHTML,
-        btn7.innerHTML,
-        btn3.innerHTML,
-        btn8.innerHTML,
-        btn9.innerHTML,
-        btn6.innerHTML]
+var wrp = document.createElement('div');
+wrp.id = "btns";
+document.body.appendChild(wrp);
+
+arr.forEach((item, i) => {
+    let btn = document.createElement('button');
+    btn.id = 'btn' + (i + 1);
+    btn.innerHTML = item;
+    wrp.appendChild(btn);
+
+});
+
+document.getElementById('btn5').onclick = function () {
+    rotate45(arr);
+    fill();
+};
+
+function fill() {
+    arr.forEach((item, i) => {
+        document.getElementById('btn' + (i + 1)).innerHTML = item;
+    });
 }
 
-btn5.addEventListener("click", clockwiseRotation)
+function rotate45(arr) {
+    let temp = arr[0];
+    arr[0] = arr[3];
+    arr[3] = arr[6];
+    arr[6] = arr[7];
+    arr[7] = arr[8];
+    arr[8] = arr[5];
+    arr[5] = arr[2];
+    arr[2] = arr[1];
+    arr[1] = temp;
+}
